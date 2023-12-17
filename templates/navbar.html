@@ -1,0 +1,69 @@
+{% load static %}
+{% load cart_template_tags %}
+
+
+
+  <!-- header section start -->
+  <div class="header_section">
+    <div class="container-fluid">
+      {% if request.user.is_authenticated %}
+       <nav class="navbar navbar-light bg-light justify-content-between ">
+          <div id="mySidenav" class="sidenav">
+             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+             <a href="{% url 'core:home' %}">Home</a>
+             <a href="/#product">Products</a>
+             <a href="/#contact">Contact</a>
+             <a href="{% url 'account_logout' %}">Logout</a>
+          </div>
+          <span class="toggle_icon" onclick="openNav()"><img src="{% static 'img/toggle-icon.png' %}"></span>
+          <a class="logo" href="{% url 'core:home' %}">
+            <h2>Beauty Mission</h2>
+          <!--  <img src="{% static 'img/logo.png' %}">-->
+          </a>
+          <form class="form-inline " method="GET" action="{% url 'core:home' %}">
+             <div class="login_text">
+                <ul>
+                  <!-- <li><a href="#">
+                    <img src="{% static 'img/user-icon.png' %}">
+                  </a></li>-->
+                   <li><a href="{% url 'core:order-summary' %}" class="">
+                     <span class="badge red z-depth-1" style="color:#464646;"> 
+                        {% cart_item_count request.user request.session.session_key %} </span>
+                     <i class="fas fa-shopping-cart" style="color:#464646;"></i>
+                   </a></li>
+                   <li><input class="form-control mr-sm-2" type="text" name="q" placeholder="Search Product" aria-label="Search"></li>
+                </ul>
+             </div>
+          </form>
+       </nav>
+       {% else %}
+       <nav class="navbar navbar-light bg-light justify-content-between">
+        <div id="mySidenav" class="sidenav">
+           <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+           <a href="{% url 'core:home' %}">Home</a>
+           <a href="/#product">Products</a>
+           <a href="/#contact">Contact</a>
+           <a href="{% url 'account_login' %}">Login</a>
+           <a href="{% url 'account_signup' %}">Signup</a>
+        </div>
+        <span class="toggle_icon" onclick="openNav()"><img src="{% static 'img/toggle-icon.png' %}"></span>
+        <a class="logo" href="{% url 'core:home' %}">
+          Beauty Mission
+        <!--  <img src="{% static 'img/logo.png' %}">-->
+        </a></a>
+        <form class="form-inline " method="GET" action="{% url 'core:home' %}">
+           <div class="login_text">
+              <ul>
+               <li><a href="{% url 'core:order-summary' %}" class="">
+                  <span class="badge red z-depth-1" style="color:#464646;"> 
+                     {% cart_item_count request.user request.session.session_key %}</span>
+                  <i class="fas fa-shopping-cart" style="color:#464646;"></i>
+                </a></li>
+                 <li><input class="form-control mr-sm-2" type="text" name="q" placeholder="Search Product" aria-label="Search"></li>
+              </ul>
+           </div>
+        </form>
+     </nav>
+     {% endif %}
+    </div>
+ </div>

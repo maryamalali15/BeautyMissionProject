@@ -1,0 +1,360 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- banner section start -->
+<div class="banner_section layout_padding mb-4">
+  <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+     <div class="carousel-inner">
+        <div class="carousel-item active">
+           <div class="container">
+              <div class="row">
+                 <div class="col-sm-6">
+                    <h1 class="banner_taital">Beauty <br>Mission</h1>
+                    <p class="banner_text">Your Beauty Is Our Mission</p>
+                    
+                 </div>
+                 <div class="col-sm-6">
+                    <div class="banner_img">
+                      <img src="{% static 'img/banner-img.png' %}">
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="carousel-item">
+           <div class="container">
+              <div class="row">
+                 <div class="col-sm-6">
+                    <h1 class="banner_taital">Beauty <br>Mission</h1>
+                    <p class="banner_text">Your Beauty Is Our Mission</p>
+                    
+                 </div>
+                 <div class="col-sm-6">
+                    <div class="banner_img">
+                      <img src="{% static 'img/banner-img.png' %}">
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="carousel-item">
+           <div class="container">
+              <div class="row">
+                 <div class="col-sm-6">
+                    <h1 class="banner_taital">Beauty <br>Mission</h1>
+                    <p class="banner_text">Your Beauty Is Our Mission</p>
+                    
+                 </div>
+                 <div class="col-sm-6">
+                    <div class="banner_img">
+                      <img src="{% static 'img/banner-img.png' %}">
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+        <div class="carousel-item">
+           <div class="container">
+              <div class="row">
+                 <div class="col-sm-6">
+                    <h1 class="banner_taital">Beauty <br>Mission</h1>
+                    <p class="banner_text">Your Beauty Is Our Mission</p>
+                    
+                 </div>
+                 <div class="col-sm-6">
+                    <div class="banner_img">
+                      <img src="{% static 'img/banner-img.png' %}">
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>
+<!-- banner section end -->
+  <main class=" mt-4">
+    <div class="container mt-4">
+      
+      <!--Section:  Services -->
+      <section class="layout_padding">
+
+         <div class="row wow fadeIn" id="product">
+           <div class="col-sm-12">
+             <h1 class="product_taital">Our Services</h1>
+             <p class="product_text">
+                Discover Your Radiance with Our Exceptional Services
+             </p>
+          </div>
+ 
+           {% for service in services %}
+           <div class="col-lg-3 col-md-6 mb-4">
+ 
+             <div class="product_box">
+ 
+               <div class="view overlay">
+                 <h4 class="bursh_text">{{ service.name }}</h4>
+                 <img src="{{ service.image.url }}" class="image_1">
+                 <a href="{{ service.get_absolute_url }}">
+                   <div class="mask rgba-white-slight"></div>
+                 </a>
+               </div>
+ 
+               <div class="btn_main">
+                 <div class="buy_bt">
+                    <ul>
+                       <li class="active"><a href="#">{{ service.get_category_display }}</a></li>
+                       <li><a href="{% url 'core:book_service' service.id %}">Book Now</a></li>
+                    </ul>
+                 </div>
+                 <h3 class="price_text">
+              </div>
+ 
+             </div>
+ 
+           </div>
+           {% endfor %}
+         </div>
+ 
+       </section>
+
+       {% if services.has_other_pages %}
+<nav class="d-flex justify-content-center wow fadeIn pb-4">
+    <ul class="pagination pg-blue">
+
+        {% if services.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?service_page={{ services.previous_page_number }}&page={{ page_obj.number }}" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        {% endif %}
+
+        <!-- Display the current page number for services -->
+        <li class="page-item active">
+            <a class="page-link" href="?service_page={{ services.number }}&page={{ page_obj.number }}">{{ services.number }}
+                <span class="sr-only">(current)</span>
+            </a>
+        </li>
+
+        {% if services.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?service_page={{ services.next_page_number }}&page={{ page_obj.number }}" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+{% endif %}
+
+
+       <!-- Services End-->
+
+      <!--Section: Products v.3-->
+      <section class="layout_padding">
+
+        <div class="row wow fadeIn" id="product">
+          <div class="col-sm-12">
+            <h1 class="product_taital">Our Products</h1>
+            <p class="product_text">
+               Discover Your Radiance with Our Exceptional Product Collection
+            </p>
+         </div>
+
+          {% for item in items %}
+          <div class="col-lg-3 col-md-6 mb-4">
+
+            <div class="product_box">
+
+              <div class="view overlay">
+                <h4 class="bursh_text">{{ item.title }}</h4>
+                <img src="{{ item.image.url }}" class="image_1">
+                <a href="{{ item.get_absolute_url }}">
+                  <div class="mask rgba-white-slight"></div>
+                </a>
+              </div>
+
+              <div class="btn_main">
+                <div class="buy_bt">
+                   <ul>
+                      <li class="active"><a href="#">{{ item.get_category_display }}</a></li>
+                      <li><a href="{{ item.get_absolute_url }}">Buy Now</a></li>
+                   </ul>
+                </div>
+                <h3 class="price_text">{% if item.discount_price %}
+                  ${{ item.discount_price }}
+                  {% else %}
+                  ${{ item.price }}
+                  {% endif %}</h3>
+             </div>
+
+            </div>
+
+          </div>
+          {% endfor %}
+        </div>
+
+      </section>
+      <!--Section: Products v.3-->
+
+      <!--Pagination-->
+
+      {% if is_paginated %}
+      <nav class="d-flex justify-content-center wow fadeIn pb-4">
+        <ul class="pagination pg-blue">
+
+          {% if page_obj.has_previous %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only">Previous</span>
+            </a>
+          </li>
+          {% endif %}
+
+          <li class="page-item active">
+            <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+
+          {% if page_obj.has_next %}
+          <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only">Next</span>
+            </a>
+          </li>
+          {% endif %}
+        </ul>
+      </nav>
+      {% endif %}
+
+    </div>
+
+    <!-- about section start -->
+    <div class="about_section layout_padding">
+      <div class="container">
+         <div class="about_section_main">
+            <div class="row">
+               <div class="col-md-6">
+                  <div class="about_taital_main">
+                     <h1 class="about_taital">About Beauty Mission</h1>
+                     <p class="about_text">
+                        Welcome to Beauty Mission! We're not just a salon – we're a place where you can make yourself look and feel great. Think of it like a special spot where you take care of yourself and feel really good.
+                        Our team at Beauty Mission is made up of people who love making others look awesome. We're here to give you cool haircuts, pretty colors, relaxing spa stuff, and neat nails – whatever makes you happy!
+                     </p>
+                     <div class="readmore_bt"><a href="/#contact">Contact Us</a></div>
+                  </div>
+               </div>
+               <div class="col-md-6">
+                  <div><img src="{% static 'img/about-img.png' %}" class="image_3"></div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- about section end -->
+   <!-- customer section start -->
+      <div class="customer_section layout_padding">
+         <div class="container">
+            <div class="row">
+               <div class="col-sm-12">
+                  <h1 class="customer_taital">What our customers says</h1>
+               </div>
+            </div>
+            <div id="main_slider" class="carousel slide" data-ride="carousel">
+               <div class="carousel-inner">
+                  <div class="carousel-item active">
+                     <div class="client_section_2">
+                        <div class="client_main">
+                           <div class="client_left">
+                              <div class="client_img"><img src="{% static 'img/abraham.jpg' %}" class="rounded-circle"></div>
+                           </div>
+                           <div class="client_right">
+                              <h3 class="name_text">Jonyro</h3>
+                              <p class="dolor_text">
+                                 Absolutely love my new hairstyle from Beauty Mission! The stylist understood exactly what I wanted and gave my hair a fresh, modern look. 
+                                 The attention to detail and skillful execution made the experience fantastic.
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="client_section_2">
+                        <div class="client_main">
+                           <div class="client_left">
+                              <div class="client_img"><img src="{% static 'img/anna.jpg' %}" class="rounded-circle"></div>
+                           </div>
+                           <div class="client_right">
+                              <h3 class="name_text">Anna</h3>
+                              <p class="dolor_text">
+                                 The nail art at Beauty Mission is beyond amazing! The artists are so creative and skilled. 
+                                 I went in with a vague idea, and they turned my nails into a work of art.
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="carousel-item">
+                     <div class="client_section_2">
+                        <div class="client_main">
+                           <div class="client_left">
+                              <div class="client_img"><img src="{% static 'img/anna.jpg' %}" class="rounded-circle"></div>
+                           </div>
+                           <div class="client_right">
+                              <h3 class="name_text">Robin</h3>
+                              <p class="dolor_text">
+                                 The nail polish selection at Beauty Mission is top-notch! They have a wide array of colors to choose from, and the quality is superb. 
+                                 The polish lasts a long time without chipping, and the shine is incredible.
+                              </p>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <a class="carousel-control-prev" href="#main_slider" role="button" data-slide="prev">
+               <i class="fa fa-angle-left"></i>
+               </a>
+               <a class="carousel-control-next" href="#main_slider" role="button" data-slide="next">
+               <i class="fa fa-angle-right"></i>
+               </a>
+            </div>
+         </div>
+      </div>
+      <!-- customer section end -->
+      <!-- contact section start -->
+      <div class="contact_section layout_padding">
+         <div class="container">
+            <div class="row" id="contact">
+               <div class="col-md-6">
+                  <h1 class="contact_taital">Get In Touch</h1>
+                  <p class="contact_text">
+                     Reach out to us for personalized consultations, bookings, or any inquiries. 
+                     Your path to beauty and relaxation starts here.
+                  </p>
+               </div>
+               <div class="col-md-6">
+                  <div class="contact_main">
+                     <div class="contact_bt text-end"><a href="mailto:beautymission@gmail.com">Contact Us</a></div>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="map_main">
+            <div class="map-responsive">
+               <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Rd+No+211,+Riffa,+Bahrain" width="600" height="400" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
+            </div>
+         </div>
+      </div>
+      <!-- contact section end -->
+  </main>
+
+{% endblock content %}
+
+
